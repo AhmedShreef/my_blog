@@ -28,13 +28,13 @@
 
         <nav class="nav-menu d-none d-lg-block">
           <ul>
-            <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
+           <router-link to="/" tag="li" exact><a>Home</a></router-link>
+            <router-link to="/about" tag="li"><a>About</a></router-link>
             <li><a href="services.html">Services</a></li>
             <li><a href="portfolio.html">Portfolio</a></li>
             <li><a href="testimonials.html">Testimonials</a></li>
             <li><a href="pricing.html">Pricing</a></li>
-            <li><a href="blog.html">Blog</a></li>
+            <router-link to="/blog" tag="li"><a>Blog</a></router-link>
             <li class="drop-down">
               <a href="">Drop Down</a>
               <ul>

@@ -5,6 +5,7 @@ import store from "./store";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import $ from "jquery";
+import "./filters.js";
 import jQuery from "jquery";
 window.jQuery = window.$ = jQuery;
 import AOS from "aos";
@@ -23,7 +24,7 @@ require("./assets/js/main.js");
 
 Vue.config.productionTip = false;
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount("#app");
