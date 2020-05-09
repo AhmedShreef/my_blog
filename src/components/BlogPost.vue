@@ -7,7 +7,7 @@
               </div>
 
               <h2 class="entry-title">
-                <a href="blog-single.html">{{title}}</a>
+                <router-link :to="`post/${slug}`">{{title}}</router-link>
               </h2>
 
               <div class="entry-meta">

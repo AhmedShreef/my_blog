@@ -5,10 +5,11 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>{{ pageName }}</h2>
+          <h2>{{ posts.category_name }}</h2>
           <ol>
             <router-link tag="li" to="/"><a>Home</a></router-link>
-            <li>{{ pageName }}</li>
+            <router-link tag="li" to="/blog"><a>Blog</a></router-link>
+            <li>{{ posts.category_name }}</li>
           </ol>
         </div>
 
@@ -23,7 +24,7 @@
 
           <div class="col-lg-8 entries">
 
-            <BlogPost v-for="post in posts.data" 
+            <BlogPost v-for="post in posts.posts.data" 
                         :key="post.id" 
                         :title="post.title" 
                         :thmbinal="post.thmbinal" 
@@ -34,7 +35,7 @@
                         ></BlogPost>
 
             <div class="blog-pagination">
-              <pagination class="justify-content-center" :data="posts" @pagination-change-page="getPosts"></pagination>
+              <pagination class="justify-content-center" :data="posts.posts" @pagination-change-page="getPosts"></pagination>
             </div>
           </div><!-- End blog entries list -->
 
@@ -61,17 +62,17 @@ import axios from "axios";
 export default {
   data() {
     return {
-      pageName: "Blog",
+      pageName: "category",
       posts: [],
     };
   },
-  name:"blog",
+  name:"Category",
   mounted: function() {
     this.getPosts();
     },
     methods: {
       getPosts(page = 1) {
-			axios.get('http://flattern.test/api/posts?page=' + page)
+			axios.get("http://flattern.test/api/category/"+this.$route.params.slug+"?page=" + page)
 				.then(res => {
 					this.posts = res.data
 				})
@@ -84,9 +85,5 @@ export default {
 }
 </script>
 <style>
-.page-item.active .page-link,.blog .blog-pagination li.active a, 
-.blog .blog-pagination li:hover a{
-  background-color:transparent !important;
-  border-color:transparent !important
-  }
+
 </style>

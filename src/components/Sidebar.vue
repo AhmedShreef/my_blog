@@ -1,92 +1,43 @@
 <template>
-    <div class="">
-        <h3 class="sidebar-title">Search</h3>
-        <div class="sidebar-item search-form">
-            <form action="">
-                <input type="text">
-                <button type="submit"><i class="icofont-search"></i></button>
-            </form>
+  <div class="">
+    <h3 class="sidebar-title">Search</h3>
+    <div class="sidebar-item search-form">
+      <form action="">
+        <input type="text" />
+        <button type="submit"><i class="icofont-search"></i></button>
+      </form>
+    </div>
+    <!-- End sidebar search formn-->
 
-        </div><!-- End sidebar search formn-->
-
-        <h3 class="sidebar-title">Categories</h3>
-        <div class="sidebar-item categories">
-            <ul>
-                <li v-for="category in categories" :key="category.id">
-                    <a href="#">{{category.name}} <span>({{category.posts_count}})</span></a>
-                </li>
-                
-            </ul>
-        </div><!-- End sidebar categories-->
-
-        <h3 class="sidebar-title">Recent Posts</h3>
-        <div class="sidebar-item recent-posts">
-        <div class="post-item clearfix">
-            <img src="assets/img/blog-recent-posts-1.jpg" alt="">
-            <h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
-            <time datetime="2020-01-01">Jan 1, 2020</time>
-        </div>
-
-        <div class="post-item clearfix">
-            <img src="assets/img/blog-recent-posts-2.jpg" alt="">
-            <h4><a href="blog-single.html">Quidem autem et impedit</a></h4>
-            <time datetime="2020-01-01">Jan 1, 2020</time>
-        </div>
-
-        <div class="post-item clearfix">
-            <img src="assets/img/blog-recent-posts-3.jpg" alt="">
-            <h4><a href="blog-single.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-            <time datetime="2020-01-01">Jan 1, 2020</time>
-        </div>
-
-        <div class="post-item clearfix">
-            <img src="assets/img/blog-recent-posts-4.jpg" alt="">
-            <h4><a href="blog-single.html">Laborum corporis quo dara net para</a></h4>
-            <time datetime="2020-01-01">Jan 1, 2020</time>
-        </div>
-
-        <div class="post-item clearfix">
-            <img src="assets/img/blog-recent-posts-5.jpg" alt="">
-            <h4><a href="blog-single.html">Et dolores corrupti quae illo quod dolor</a></h4>
-            <time datetime="2020-01-01">Jan 1, 2020</time>
-        </div>
-
-        </div><!-- End sidebar recent posts-->
-
-        <h3 class="sidebar-title">Tags</h3>
-        <div class="sidebar-item tags">
-        <ul>
-            <li><a href="#">App</a></li>
-            <li><a href="#">IT</a></li>
-            <li><a href="#">Business</a></li>
-            <li><a href="#">Business</a></li>
-            <li><a href="#">Mac</a></li>
-            <li><a href="#">Design</a></li>
-            <li><a href="#">Office</a></li>
-            <li><a href="#">Creative</a></li>
-            <li><a href="#">Studio</a></li>
-            <li><a href="#">Smart</a></li>
-            <li><a href="#">Tips</a></li>
-            <li><a href="#">Marketing</a></li>
-        </ul>
-        </div><!-- End sidebar tags-->
-
-            
-    </div><!--/appsidepar-->
+    <h3 class="sidebar-title">Categories</h3>
+    <div class="sidebar-item categories">
+      <ul>
+        <li v-for="category in categories" :key="category.id">
+          <router-link :to="`category/${category.slug}`" exact
+            >{{ category.name }}
+            <span>({{ category.posts_count }})</span></router-link
+          >
+        </li>
+      </ul>
+    </div>
+    <!-- End sidebar categories-->
+  </div>
+  <!--/appsidepar-->
 </template>
 <script>
 import axios from "axios";
 export default {
-    name:'sidebar',
-    data() {
-        return {
-            categories: []
-        };
-    },
-    mounted: function() {
-    axios.get("http://flattern.test/api/categories")
-      .then(res => this.categories = res.data)
-        .catch(err => console.log(err));
-    }
-}
+  name: "sidebar",
+  data() {
+    return {
+      categories: []
+    };
+  },
+  mounted: function() {
+    axios
+      .get("http://flattern.test/api/categories")
+      .then(res => (this.categories = res.data))
+      .catch(err => console.log(err));
+  }
+};
 </script>

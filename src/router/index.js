@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Blog from "../views/Blog.vue";
 import SinglePost from "../views/SingelPost.vue";
+import Category from "../views/Category.vue";
 Vue.use(VueRouter);
 
 const routes = [{
@@ -28,6 +29,11 @@ const routes = [{
         path: "/post/:slug",
         name: "SinglePost",
         component: SinglePost
+    },
+    {
+        path: "/category/:slug",
+        name: "Category",
+        component: Category
     }
 ];
 

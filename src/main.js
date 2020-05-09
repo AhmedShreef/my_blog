@@ -21,7 +21,7 @@ require("./assets/vendor/waypoints/jquery.waypoints.min.js");
 require("./assets/vendor/owl.carousel/owl.carousel.js");
 // require("./assets/vendor/aos/aos.js");
 require("./assets/js/main.js");
-
+Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.config.productionTip = false;
 new Vue({
     router,
