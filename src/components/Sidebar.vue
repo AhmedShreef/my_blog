@@ -13,10 +13,10 @@
     <div class="sidebar-item categories">
       <ul>
         <li v-for="category in categories" :key="category.id">
-          <router-link :to="`category/${category.slug}`" exact
+          <a :href="`/category/${category.slug}`" exact
             >{{ category.name }}
-            <span>({{ category.posts_count }})</span></router-link
-          >
+            <span>({{ category.posts_count }})</span>
+          </a>
         </li>
       </ul>
     </div>
@@ -26,6 +26,7 @@
 </template>
 <script>
 import axios from "axios";
+import { mapGetters } from "vuex";
 export default {
   name: "sidebar",
   data() {
@@ -34,10 +35,15 @@ export default {
     };
   },
   mounted: function() {
+    // using vuex
+    console.log(this.getApiUrl);
     axios
-      .get("http://flattern.test/api/categories")
+      .get(this.getApiUrl + "categories")
       .then(res => (this.categories = res.data))
       .catch(err => console.log(err));
+  },
+  computed: {
+    ...mapGetters(["getApiUrl"])
   }
 };
 </script>

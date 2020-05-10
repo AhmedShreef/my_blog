@@ -25,19 +25,21 @@
               </div>
 
               <h2 class="entry-title">
-                <a>{{post.title}}</a>
+                <a>{{ post.title }}</a>
               </h2>
 
               <div class="entry-meta">
                 <ul>
                   <li class="d-flex align-items-center">
                     <i class="icofont-user"></i>
-                    <a href="blog-single.html">{{post.author}}</a>
+                    <a href="blog-single.html">{{ post.author }}</a>
                   </li>
                   <li class="d-flex align-items-center">
                     <i class="icofont-wall-clock"></i>
                     <a href="blog-single.html"
-                      ><time datetime="2020-01-01">{{post.created_at}}</time></a
+                      ><time datetime="2020-01-01">{{
+                        post.created_at
+                      }}</time></a
                     >
                   </li>
                   <li class="d-flex align-items-center">
@@ -53,9 +55,10 @@
                 <div class="float-left">
                   <i class="icofont-folder"></i>
                   <ul class="cats">
-                    <li><a href="#">{{post.category}}</a></li>
+                    <li>
+                      <a href="#">{{ post.category }}</a>
+                    </li>
                   </ul>
-
                 </div>
 
                 <div class="float-right share">
@@ -93,6 +96,7 @@
 
 <script>
 import Sidebar from "@/components/Sidebar.vue";
+import { mapGetters } from "vuex";
 import axios from "axios";
 export default {
   data: function() {
@@ -104,12 +108,15 @@ export default {
   name: "singlePost",
   mounted: function() {
     axios
-      .get("http://flattern.test/api/post/"+this.$route.params.slug)
+      .get(this.getApiUrl + "post/" + this.$route.params.slug)
       .then(res => (this.post = res.data))
       .catch(err => console.log(err));
   },
   components: {
     Sidebar
+  },
+  computed: {
+    ...mapGetters(["getApiUrl"])
   }
 };
 </script>
