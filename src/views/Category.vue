@@ -4,11 +4,11 @@
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-          <h2>{{ posts.category_name }}</h2>
+          <h2>{{ category.category_name }}</h2>
           <ol>
             <router-link tag="li" to="/"><a>Home</a></router-link>
             <router-link tag="li" to="/blog"><a>Blog</a></router-link>
-            <li>{{ posts.category_name }}</li>
+            <li>{{ category.category_name }}</li>
           </ol>
         </div>
       </div>
@@ -66,6 +66,7 @@ export default {
     return {
       pageName: "category",
       posts: [],
+      category: [],
       pagination: {}
     };
   },
@@ -86,6 +87,7 @@ export default {
         .then(res => {
           this.posts = res.data.posts.data;
           this.pagination = res.data.posts;
+          this.category = res.data.category;
         });
     }
   },

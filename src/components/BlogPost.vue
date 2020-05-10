@@ -7,7 +7,7 @@
               </div>
 
               <h2 class="entry-title">
-                <router-link :to="`post/${slug}`">{{title}}</router-link>
+                <router-link :to="`/post/${slug}`">{{title}}</router-link>
               </h2>
 
               <div class="entry-meta">
@@ -21,7 +21,7 @@
               <div class="entry-content">
                 <p v-html="$options.filters.shorten(content)"></p>
                 <div class="read-more">
-                  <router-link :to="`post/${slug}`">Read More</router-link>
+                  <router-link :to="`/post/${slug}`">Read More</router-link>
                 </div>
               </div>
 
@@ -36,7 +36,3 @@
         name:'post'
     }
 </script>
-
-<style scoped>
-
-</style>

@@ -4,15 +4,14 @@
       <div class="container d-flex">
         <div class="contact-info mr-auto">
           <i class="icofont-envelope"></i
-          ><a href="mailto:contact@example.com">contact@example.com</a>
-          <i class="icofont-phone"></i> +1 5589 55488 55
+          ><a :href="+'mailto:'+setting.app_email_contact">{{setting.app_email_contact}}</a>
+          <i class="icofont-phone"></i> {{setting.app_phone_contact ? setting.app_phone_contact : ''}}
         </div>
         <div class="social-links">
-          <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
-          <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
-          <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
-          <a href="#" class="skype"><i class="icofont-skype"></i></a>
-          <a href="#" class="linkedin"><i class="icofont-linkedin"></i></a>
+          <a :href="setting.app_tw_link" target="_blang" class="twitter"><i class="icofont-twitter"></i></a>
+          <a :href="setting.app_fp_link" target="_blang" class="facebook"><i class="icofont-facebook"></i></a>
+          <a :href="setting.app_insta_link" target="_blang" class="instagram"><i class="icofont-instagram"></i></a>
+          <a :href="setting.app_linkedin_link" target="_blang" class="linkedin"><i class="icofont-linkedin"></i></a>
         </div>
       </div>
     </section>
@@ -21,7 +20,7 @@
     <header id="header">
       <div class="container d-flex">
         <div class="logo mr-auto">
-          <h1 class="text-light"><a href="index.html">Flattern</a></h1>
+          <h1 class="text-light"><router-link to="/" exact>{{setting.app_title}}</router-link></h1>
           <!-- Uncomment below if you prefer to use an image logo -->
           <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
@@ -30,12 +29,8 @@
           <ul>
            <router-link to="/" tag="li" exact><a>Home</a></router-link>
             <router-link to="/about" tag="li"><a>About</a></router-link>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="testimonials.html">Testimonials</a></li>
-            <li><a href="pricing.html">Pricing</a></li>
             <router-link to="/blog" tag="li"><a>Blog</a></router-link>
-            <li class="drop-down">
+            <!--<li class="drop-down">
               <a href="">Drop Down</a>
               <ul>
                 <li><a href="#">Drop Down 1</a></li>
@@ -53,8 +48,7 @@
                 <li><a href="#">Drop Down 4</a></li>
                 <li><a href="#">Drop Down 5</a></li>
               </ul>
-            </li>
-            <li><a href="contact.html">Contact</a></li>
+            </li>-->
           </ul>
         </nav>
         <!-- .nav-menu -->
@@ -65,7 +59,27 @@
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+import { mapGetters } from "vuex";
+export default {
+  name: "navbar",
+  data() {
+    return {
+      setting: []
+    };
+  },
+  mounted: function() {
+    // using vuex
+    console.log(this.getApiUrl);
+    axios
+      .get(this.getApiUrl + "setting")
+      .then(res => (this.setting = res.data))
+      .catch(err => console.log(err));
+  },
+  computed: {
+    ...mapGetters(["getApiUrl"])
+  }
+};
 </script>
 
 <style></style>
